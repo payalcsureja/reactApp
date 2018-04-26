@@ -9,13 +9,29 @@ npm start
 
 ### Steps
 
-# [Create React App](https://github.com/facebookincubator/create-react-app).
+#### [Create React App](https://github.com/facebookincubator/create-react-app).
 $ npm install -g create-react-app
 $ create-react-app react-app
 
 $ cd react-app
 $ npm start
 
+$ npm run eject
+$ npm i sass-loader node-sass --save
+
+### Update webpack.config.dev.js file within the config folder 
+```
+,
+{
+  test: /\.scss$/,
+  loaders: [
+    require.resolve('style-loader'),
+    require.resolve('css-loader'),
+    require.resolve('sass-loader')
+  ]
+}
+```
+Just add /\.scss$/, to the ‘exclude’ list since it needs to be updated whenever there’s a change to loader extensions.
 
 # OR use links
 https://github.com/rwieruch/minimal-react-webpack-babel-setup
