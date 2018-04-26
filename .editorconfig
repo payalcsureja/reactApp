@@ -1,0 +1,15 @@
+# editorconfig.org
+# https://gist.github.com/payalcsureja/f3340277d6af74744a34e6331491aed7
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
