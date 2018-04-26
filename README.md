@@ -1,5 +1,12 @@
 # Starter Kit for [Building Applications in React and Redux in ES6]
 
+###
+cd www
+git clone https://github.com/payalcsureja/reactApp.git reactApp
+cd reactApp
+npm install
+npm start
+
 ### Steps
 
 # [Create React App](https://github.com/facebookincubator/create-react-app).
