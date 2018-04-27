@@ -107,13 +107,23 @@ In order to use these classes we need to change the classNames to the JS object 
 for classname with dash use className={styles['App-header']}
 
 
+### Add bootstrap
+npm install --save bootstrap
+
+<!-- npm install --save react-bootstrap -->
+
 ###Debug:
 Something is already running on port 3000 ! - kill node process from windows task manager
 
 scss - Also I had received an error “Cannot resolve module ‘style’” and I was able to resolve this error by making a postcss.config.js file at the root of my project directory. Check here for more info about that config file set-up.
 
+or bootstrap Module build failed: Error: No PostCSS Config found in: react\node_modules\bootstrap\dist\css
+
 Create postcss.config.js file
+```
 module.exports = { plugins: [require('autoprefixer')] };
+```
+
 
 ### serve build dir locally
 $ npm run build

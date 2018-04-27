@@ -214,6 +214,24 @@ module.exports = {
           // },
           {
             test: /\.css$/,
+            include: /node_modules/,
+            use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: false,
+                    localIdentName: '[name]__[local]___[hash:base64:5]'
+                  }
+                },
+              'postcss-loader'
+              ]
+            })
+          },
+          {
+            test: /\.css$/,
+            exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
               use: [
