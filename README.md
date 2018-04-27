@@ -19,7 +19,9 @@ $ npm start
 $ npm run eject
 $ npm i sass-loader node-sass --save
 
-### Update webpack.config.dev.js file within the config folder 
+### Update webpack.config.dev.js file within the config folder for saas
+https://medium.com/@kswanie21/css-modules-sass-in-create-react-app-37c3152de9
+https://medium.com/@kswanie21/css-modules-sass-in-create-react-app-37c3152de9
 ```
 ,
 {
@@ -33,7 +35,96 @@ $ npm i sass-loader node-sass --save
 ```
 Just add /\.scss$/, to the ‘exclude’ list since it needs to be updated whenever there’s a change to loader extensions.
 
+OR
+Modify the webpack.config.dev.js file
+```
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+{
+  exclude: [
+    /\.html$/,
+    /\.(js|jsx)$/,
+    /\.css$/,
+    /\.json$/,
+    /\.bmp$/,
+    /\.gif$/,
+    /\.jpe?g$/,
+    /\.png$/,
+    /\.scss$/,
+  ],
+  loader: require.resolve('file-loader'),
+  options: {
+    name: 'static/media/[name].[hash:8].[ext]',
+  },
+},
+{
+  test: /\.css$/,
+  use: ExtractTextPlugin.extract({
+  fallback: 'style-loader',
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      },
+    'postcss-loader'
+    ]
+  })
+},
+{
+  test: /\.scss$/,
+  use: ExtractTextPlugin.extract({
+  fallback: 'style-loader',
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          sourceMap: true,
+          importLoaders: 2,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      },
+    'sass-loader'
+    ]
+  })
+},
+
+plugins: [
+  new ExtractTextPlugin({ filename: 'styles.css', allChunks: true, disable: process.env.NODE_ENV !== 'production' }),
+]  
+
+```
++ update 
+In your App component let’s import our styles and console.log them.
+
+import styles from './App.scss';
+
+In order to use these classes we need to change the classNames to the JS object literals, like so className={styles.app}
+
+for classname with dash use className={styles['App-header']}
+
+
+###Debug:
+Something is already running on port 3000 ! - kill node process from windows task manager
+
+scss - Also I had received an error “Cannot resolve module ‘style’” and I was able to resolve this error by making a postcss.config.js file at the root of my project directory. Check here for more info about that config file set-up.
+
+Create postcss.config.js file
+module.exports = { plugins: [require('autoprefixer')] };
+
+### serve build dir locally
+$ npm run build
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
 # OR use links
+https://medium.com/@srinisoundar/setting-up-environment-for-react-sass-es2015-babel-with-webpack-2f77445129
 https://github.com/rwieruch/minimal-react-webpack-babel-setup
 https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
 https://www.robinwieruch.de/react-eslint-webpack-babel/
